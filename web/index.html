@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+		<link rel="stylesheet" href="style.css">
+
+		<title>Workforce | Age In Hours | Phill Rodgers</title>
+	</head>
+  	<body>
+
+		<main role="main">
+
+			<section class="jumbotron text-center begin">
+					
+				<div class="container">
+
+					<h1 class="mb-3">You look old to me, <br class="d-block d-md-none" />let's check.</h1>
+
+					<div class="row">
+						
+						<div class="col">
+	
+							<div class="input-group mb-3">
+	
+								<input type="text" class="form-control form-control-xl" id="fname" name="fname" placeholder="Your name" aria-label="Your name" aria-describedby="basic-addon2">
+
+								<div class="input-group-append">
+									<button onclick="workforce.begin();" class="btn btn-primary px-5 py-5" type="button">Begin</button>
+								</div>
+
+							</div>
+	
+						</div>
+	
+					</div>
+
+				</div>
+			
+			</section>
+
+			<section class="jumbotron begin d-none">
+
+				<div class="container">
+
+					<div class="row">
+							
+						<div class="col-sm-12 pt-5 pb-5 text-center">
+
+							<p>Use the date picker or the jumbo input to set your date of birth</p>
+
+							<label for="dob">Your Birthday (Date and time):</label>
+							<input type="datetime-local" id="dob" name="dob" value="" min="1900-01-01" max="2020-10-20" onchange="workforce.updateJumbo(this);" />
+
+						</div>
+							
+						<div class="col-md-12 col-lg-6">
+
+							<div class="row no-gutters">
+							
+								<div class="col-md-3 mb-3">
+
+									<button type="button" tabindex="-1" onclick="workforce.increment('date', 1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
+
+									<input type="number" tabindex="0" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" class="form-control form-control-xl text-center" name="date" placeholder="Date" value="" required aria-label="day of birth" />
+					
+									<button type="button" tabindex="-1" onclick="workforce.increment('date', -1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
+
+								</div>
+
+								<div class="col-md-6 mb-3 pl-1 pr-1">
+
+									<button type="button" tabindex="-1" onclick="workforce.incrementMonth(1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
+
+									<input type="text" class="form-control form-control-xl text-center" onfocus="this.select();" onkeyup="workforce.setMonth(this);" name="month" placeholder="Month" value="" required aria-label="month of birth" />
+					
+									<button type="button" tabindex="-1" onclick="workforce.incrementMonth(-1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
+
+								</div>
+
+								<div class="col-md-3 mb-3">
+
+									<button type="button" tabindex="-1" onclick="workforce.increment('year', 1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
+
+									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" class="form-control form-control-xl text-center" name="year" placeholder="Year" value="" required aria-label="year of birth" />
+					
+									<button type="button" tabindex="-1" onclick="workforce.increment('year', -1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
+
+								</div>
+
+							</div>
+							
+						</div>
+
+						<div class="col-md-12 col-lg-5 offset-lg-1">
+				
+							<div class="row row-eq-height no-gutters">
+							
+								<div class="col-sm-5 col-md-5 mb-3">
+
+									<button type="button" tabindex="-1" onclick="workforce.increment('hours', 1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
+
+									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" class="form-control form-control-xl text-center" name="hours" placeholder="Hours" value="" required aria-label="time of birth in hours" />
+					
+									<button type="button" tabindex="-1" onclick="workforce.increment('hours', -1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
+
+								</div>
+
+								<div class="col-sm-2 col-md-2 my-auto text-center">
+
+									<span class="time-separator">:</span>
+
+								</div>
+								
+								<div class="col-sm-5 col-md-5 mb-3">
+
+									<button type="button" tabindex="-1" onclick="workforce.increment('minutes', 1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
+
+									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" class="form-control form-control-xl text-center" name="minutes" placeholder="Minutes" value="" required aria-label="time of birth in minutes" />
+					
+									<button type="button" tabindex="-1" onclick="workforce.increment('minutes', -1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
+
+								</div>
+						
+							</div>
+
+						</div>
+
+						<div class="col-sm-12 pt-5 pb-5 results text-center">
+
+							<p>You are <span class="years"></span> years, <span class="months"></span> months, <span class="days"></span> days and <span class="hours"></span> hours old. <span class="andchange"></span></p>
+
+							<button type="button" onclick="workforce.save();" class="btn btn-success my-2">Save and show results</button>
+
+						</div>
+
+						<div class="col-sm-12 pt-5 pb-5 results-table d-none">
+
+							<table class="table">
+								<thead>
+								  <tr>
+									<th scope="col">Name</th>
+									<th scope="col">Date of birth</th>
+									<th scope="col">Age</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  
+								</tbody>
+							</table>
+
+							<button type="button" onclick="workforce.clearResults();" class="btn btn-danger my-2">Clear results</button>
+							<button type="button" onclick="workforce.restart();" class="btn btn-primary my-2">Start again</button>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</section>
+
+		</main>
+		
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+		<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+
+		<script type="text/javascript" src="/workforce.js"></script>
+
+		<script type="text/javascript">
+		
+			document.addEventListener("DOMContentLoaded", function(event) { 
+				workforce.init();
+		  	});
+		
+		</script>
+
+	</body>
+</html>

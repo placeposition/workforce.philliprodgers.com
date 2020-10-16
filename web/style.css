@@ -1,0 +1,50 @@
+
+.jumbotron {
+    background-color: #ffffff;
+}
+
+.jumbotron .input-group-append button {
+	border-top-right-radius: .6rem;
+	border-bottom-right-radius: .6rem;
+	font-size: 1.8rem;
+}
+
+.form-control-xl, .input-group-xl>.form-control, .input-group-xl>.input-group-append>.btn, .input-group-xl>.input-group-append>.input-group-text, .input-group-xl>.input-group-prepend>.btn, .input-group-xl>.input-group-prepend>.input-group-text {
+    padding: 1rem 1rem;
+    font-size: 1.8rem;
+    line-height: 3;
+	border-radius: .6rem;
+	border-width: 2px;
+}
+
+.no-border {
+	border: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+span.time-separator {
+	font-size: 50px;
+	line-height: 0;
+}
+
+input.invalid, 
+input.invalid:focus {
+	border: 2px solid #cc0000;
+}
+
+.results span {
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+
