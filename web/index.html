@@ -12,7 +12,8 @@
 
 		<link rel="stylesheet" href="style.css">
 
-		<title>Workforce | Age In Hours | Phill Rodgers</title>
+		<title>Workforce | Age In Years, Days and Hours | Phill Rodgers</title>
+
 	</head>
   	<body>
 
@@ -54,10 +55,16 @@
 							
 						<div class="col-sm-12 pt-5 pb-5 text-center">
 
-							<p>Use the date picker or the jumbo input to set your date of birth</p>
-
-							<label for="dob">Your Birthday (Date and time):</label>
+							<label for="dob" class="sr-only">Your Birthday (Date and time):</label>
 							<input type="datetime-local" id="dob" name="dob" value="" min="1900-01-01" max="2020-10-20" onchange="workforce.updateJumbo(this);" />
+
+						
+
+						</div>
+
+						<div class="col-sm-12 pt-5 pb-5 text-center">
+
+							<h3>Use the boring date and time picker above... <br />or the jumbo fun picker to set your date of birth</h3>
 
 						</div>
 							
@@ -69,7 +76,8 @@
 
 									<button type="button" tabindex="-1" onclick="workforce.increment('date', 1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
 
-									<input type="number" tabindex="0" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" class="form-control form-control-xl text-center" name="date" placeholder="Date" value="" required aria-label="day of birth" />
+									<label for="date" class="sr-only">day of birth</label>
+									<input type="number" tabindex="0" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" onblur="workforce.setIntNow(this);" class="form-control form-control-xl text-center" id="date" name="date" placeholder="Date" value="" required />
 					
 									<button type="button" tabindex="-1" onclick="workforce.increment('date', -1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
 
@@ -78,8 +86,9 @@
 								<div class="col-md-6 mb-3 pl-1 pr-1">
 
 									<button type="button" tabindex="-1" onclick="workforce.incrementMonth(1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
-
-									<input type="text" class="form-control form-control-xl text-center" onfocus="this.select();" onkeyup="workforce.setMonth(this);" name="month" placeholder="Month" value="" required aria-label="month of birth" />
+									
+									<label for="month" class="sr-only">month of birth</label>
+									<input type="text" class="form-control form-control-xl text-center" onkeyup="workforce.setMonth(this);" onblur="workforce.setMonthNow(this);"id="month" name="month" placeholder="Month" value="" required />
 					
 									<button type="button" tabindex="-1" onclick="workforce.incrementMonth(-1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
 
@@ -89,7 +98,8 @@
 
 									<button type="button" tabindex="-1" onclick="workforce.increment('year', 1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
 
-									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" class="form-control form-control-xl text-center" name="year" placeholder="Year" value="" required aria-label="year of birth" />
+									<label for="year" class="sr-only">year of birth</label>
+									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" onblur="workforce.setIntNow(this);" class="form-control form-control-xl text-center" id="year" name="year" placeholder="Year" value="" required  />
 					
 									<button type="button" tabindex="-1" onclick="workforce.increment('year', -1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
 
@@ -107,7 +117,8 @@
 
 									<button type="button" tabindex="-1" onclick="workforce.increment('hours', 1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
 
-									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" class="form-control form-control-xl text-center" name="hours" placeholder="Hours" value="" required aria-label="time of birth in hours" />
+									<label for="hours" class="sr-only">time in hours at birth</label>
+									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" onblur="workforce.setIntNow(this);" class="form-control form-control-xl text-center" id="hours" name="hours" placeholder="Hours" value="" required />
 					
 									<button type="button" tabindex="-1" onclick="workforce.increment('hours', -1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
 
@@ -123,7 +134,8 @@
 
 									<button type="button" tabindex="-1" onclick="workforce.increment('minutes', 1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-up fa-3x"></i></button>
 
-									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" class="form-control form-control-xl text-center" name="minutes" placeholder="Minutes" value="" required aria-label="time of birth in minutes" />
+									<label for="minutes" class="sr-only">time in minutes at birth</label>
+									<input type="number" onfocus="this.select();" onkeypress="workforce.numOnly(event);" onkeyup="workforce.setInt(this);" onblur="workforce.setIntNow(this);" class="form-control form-control-xl text-center" name="minutes" placeholder="Minutes" value="" required />
 					
 									<button type="button" tabindex="-1" onclick="workforce.increment('minutes', -1);" class="btn btn-outline-secondary no-border btn-block my-2"><i class="fas fa-caret-down fa-3x"></i></button>
 

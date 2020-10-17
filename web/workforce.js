@@ -70,7 +70,7 @@ window.workforce = (function(window, moment){
 		}
 	};
 
-	var setInt = function setInt(e) {
+	var setIntNow = function setIntNow(e) {
 
 		var i = parseInt(e.value, 10);
 
@@ -93,6 +93,8 @@ window.workforce = (function(window, moment){
 			dob.dispatchEvent(new Event('change'));
 		}
 	};
+
+	var setInt = debounce(setIntNow, 2000);
 
 	var increment = function increment(input, i) {
 
@@ -145,25 +147,21 @@ window.workforce = (function(window, moment){
 		return false;
 	};
 
-	var setMonth = function setMonth(e) {
+	var setMonthNow = function setMonthNow(e) {
 
 		var i = parseInt(e.value, 10);
 
 		if(!isNaN(i)) {
-		
-			if (!debounce(monthInt, 1200)()) {
-
-				return false;
-			};
+			return monthInt();
 		}
 
 		var v = e.value.toLowerCase();
 
-		if (e.value.length > 2) {
+		if (e.value.length > 0) {
 			
 			var month = months.find(function(m) {
-				return m.label.includes(v);
-			})
+				return m.label.startsWith(v); // m.label.includes(v);
+			});
 
 			if (month) {
 
@@ -178,6 +176,8 @@ window.workforce = (function(window, moment){
 			}
 		}
 	};
+
+	var setMonth = debounce(setMonthNow, 2000);
 
 	var init = function init() {
 
@@ -357,7 +357,10 @@ window.workforce = (function(window, moment){
 		_self.incrementMonth = incrementMonth.bind(_self);
 		
 		_self.setInt = setInt.bind(_self);
+		_self.setIntNow = setIntNow.bind(_self);
+		
 		_self.setMonth = setMonth.bind(_self);
+		_self.setMonthNow = setMonthNow.bind(_self);
 
 		_self.updateJumbo = updateJumbo.bind(_self);
 
