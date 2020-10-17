@@ -1,11 +1,6 @@
-window.workforce = (function(window, moment){
+window.workforce = (function(moment, document, Promise, localStorage, console) {
 
 	'use strict';
-
-	var localStorage = window.localStorage;
-	var document = window.document;
-	var Promise = window.Promise;
-	var console = window.console;
 
 	var months = [
 		{month: 0, label: 'january'},
@@ -255,33 +250,41 @@ window.workforce = (function(window, moment){
 		updateAge();
 	};
 
+	var createColumn = function createColumn(text) {
+		var results = document.createElement('td');
+		results.innerText = text;
+		return results;
+	};
+
+	var createRow = function createRow(columns) {
+
+		return columns.reduce(function(prev, item){
+			prev.appendChild(item);
+			return prev;
+		}, document.createElement('tr'));
+	};
+
 	var resultTransform = function resultTransform(result) {
 
-		var row = [];
+		var columns = [];
 		var dob = moment(result.dob);
 		var _age = age(dob);
-		
-		row.push('<tr>');
 
-		row.push('<td>' + result.name + '</td>');
+		columns.push(createColumn(result.name));
+		columns.push(createColumn(dob.format('DD MMM YYYY HH:mm')));
+		columns.push(createColumn(String(_age.years) + ' years, ' + String(_age.months) + ' months, ' + String(_age.days) + ' days, ' + String(_age.hours)));
 
-		row.push('<td>' + dob.format('DD MMM YYYY HH:mm') + '</td>');
-
-		row.push('<td>' + String(_age.years) + ' years, ' + String(_age.months) + ' months, ' + String(_age.days) + ' days, ' + String(_age.hours) + ' hours</td>');
-
-		row.push('</tr>');
-
-		return row.reduce(function(results, item){
-			return results + item;
-		}, '');
-
+		var row = createRow(columns);
+	
+		return row;
 	};
 
 	var drawResults = function drawResults(results) {
 
-		var table = results.reduce(function(results, item){
-			return results + resultTransform(item);
-		}, '');
+		var table = results.reduce(function(fragment, item){
+			fragment.appendChild(resultTransform(item));
+			return fragment;
+		}, document.createDocumentFragment());
 
 		var el = document.querySelector('.results-table');
 
@@ -290,7 +293,8 @@ window.workforce = (function(window, moment){
 			var elTable = el.querySelector('table > tbody');
 
 			el.classList.remove('d-none');
-			elTable.innerHTML = table;
+			elTable.innerHTML = '';
+			elTable.appendChild(table);
 		}
 	};
 
@@ -301,7 +305,7 @@ window.workforce = (function(window, moment){
 			dob: document.querySelector('input[name="dob"]').value,
 		};
 
-		var results = new Array(0);
+		var results = [];
 
 		var storageItem = localStorage.getItem('workforce-results');
 
@@ -372,4 +376,4 @@ window.workforce = (function(window, moment){
 
 	return new Workforce();
 
-}(window, window.moment));
+}(moment, document, Promise, localStorage, console));
