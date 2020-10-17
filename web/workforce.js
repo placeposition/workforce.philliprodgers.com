@@ -23,9 +23,9 @@ window.workforce = (function(moment, document, Promise, localStorage, console) {
 	var intInputs = {
 		date: function (i) { birth.date(i); },
 		month: function (i) { birth.month(i); },
-		year: function (i) { birth.year(i);},
-		hours: function (i) { birth.hours(i);},
-		minutes: function (i) { birth.minutes(i);}
+		year: function (i) { birth.year(i); },
+		hours: function (i) { birth.hours(i); },
+		minutes: function (i) { birth.minutes(i); }
 	};
 
 	var incrementInputs = {
@@ -240,6 +240,8 @@ window.workforce = (function(moment, document, Promise, localStorage, console) {
 	var updateJumbo = function updateJumbo(e) {
 
 		var input = moment(e.value);
+
+		birth = moment(e.value);
 		
 		document.querySelector('input[name="date"]').value = input.date();
 		document.querySelector('input[name="month"]').value = input.format('MMMM');
@@ -290,9 +292,9 @@ window.workforce = (function(moment, document, Promise, localStorage, console) {
 
 		if (el) {
 
-			var elTable = el.querySelector('table > tbody');
-
 			el.classList.remove('d-none');
+
+			var elTable = el.querySelector('table > tbody');
 			elTable.innerHTML = '';
 			elTable.appendChild(table);
 		}
@@ -315,7 +317,7 @@ window.workforce = (function(moment, document, Promise, localStorage, console) {
 
 		results.push(result);
 
-		window.localStorage.setItem('workforce-results',  JSON.stringify(results));
+		window.localStorage.setItem('workforce-results', JSON.stringify(results));
 
 		drawResults(results);
 	};
@@ -370,8 +372,7 @@ window.workforce = (function(moment, document, Promise, localStorage, console) {
 
 		_self.save = save.bind(_self);
 		_self.clearResults = clearResults.bind(_self);
-		_self.restart = restart.bind(_self);
-	
+		_self.restart = restart.bind(_self);	
     };
 
 	return new Workforce();
